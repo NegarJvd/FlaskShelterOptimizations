@@ -1,0 +1,1357 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Crisis management calculations",
+      "description": "API list for calculation of cross sections, load and joint detais of shelter.",
+      "version": "1.0"
+    },
+    "basePath": "",
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/cross_section": {
+        "post": {
+          "summary": "Calculate cross section values based on input attributes.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Attributes for material, load, and footprint",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "material": {
+                    "type": "object",
+                    "properties": {
+                      "partial_factor": { 
+                        "type": "number",
+                        "example": 1.3
+                       },
+                      "density": { 
+                        "type": "number",
+                        "example": 610
+                       },
+                      "bending_strength": { 
+                        "type": "number",
+                        "example": 91
+                       },
+                      "shear_strength": { 
+                        "type": "number",
+                        "example": 9
+                       },
+                      "compression_parallel": { 
+                        "type": "number",
+                        "example": 45
+                       },
+                      "e_modulus": { 
+                        "type": "number",
+                        "example": 11.2
+                       },
+                      "e_modulus_5": { 
+                        "type": "number",
+                        "example": 11.2
+                       },
+                      "modification_factor_permanent_term": { 
+                        "type": "number",
+                        "example": 0.5
+                       },
+                      "modification_factor_medium_term": { 
+                        "type": "number",
+                        "example": 0.65
+                       },
+                      "modification_factor_instantaneous_term": { 
+                        "type": "number",
+                        "example": 0.9
+                       },
+                      "creep_factor": { 
+                        "type": "number",
+                        "example": 2
+                       },
+                      "creep_factor_solid_timber": { 
+                        "type": "number",
+                        "example": 0.2
+                       }
+                    }
+                  },
+                  "load": {
+                    "type": "object",
+                    "properties": {
+                      "P_L": { 
+                        "type": "number",
+                        "example": 2.96
+                       },
+                      "M_L": { 
+                        "type": "number",
+                        "example": 7.44
+                       },
+                      "I_L": { 
+                        "type": "number",
+                        "example": 5.66
+                       },
+                      "SLS_L": { 
+                        "type": "number",
+                        "example": 5.18
+                       },
+                      "gk": { 
+                        "type": "number",
+                        "example": 1.38
+                       },
+                      "g_lead": { 
+                        "type": "number",
+                        "example": 2
+                       },
+                      "g_acmp": { 
+                        "type": "number",
+                        "example": 1.4
+                       },
+                      "psi_lead": { 
+                        "type": "number",
+                        "example": 0
+                       },
+                      "psi_acmp": { 
+                        "type": "number",
+                        "example": 0.2
+                       },
+                      "P_clm": { 
+                        "type": "number",
+                        "example": 3.7
+                       },
+                      "M_clm": { 
+                        "type": "number",
+                        "example": 9.2
+                       },
+                      "I_clm": { 
+                        "type": "number",
+                        "example": 7
+                       }
+                    }
+                  },
+                  "footprint": {
+                    "type": "object",
+                    "properties": {
+                      "beam_length": { 
+                        "type": "number",
+                        "example": 2
+                       },
+                      "height": { 
+                        "type": "number",
+                        "example": 2
+                       }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with cross-section values.",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "weight": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "4.36 kg"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 4.36
+                        }
+                      }
+                    },
+                    "width": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "65 mm"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 65
+                        }
+                      }
+                    },
+                    "thickness": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "55 mm"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 55
+                        }
+                      }
+                    },
+                    "length": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "2.00 m"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 2.0
+                        }
+                      }
+                    },
+                    "bending_utilisation": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "249.48%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 249.48
+                        }
+                      }
+                    },
+                    "bending_status": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Unacceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    },
+                    "shear_utilisation": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "69.37%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 69.37
+                        }
+                      }
+                    },
+                    "shear_status": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Acceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    },
+                    "sls_utilisation": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "1603.77%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 1603.77
+                        }
+                      }
+                    },
+                    "sls_status": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Unacceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    },
+                    "compression_utilisation": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "11.44%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 11.44
+                        }
+                      }
+                    },
+                    "compression_status": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Acceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    },
+                    "buckling_utilisation_in_plane": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "32.12%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 32.12
+                        }
+                      }
+                    },
+                    "buckling_status_in_plane": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Acceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    },
+                    "buckling_utilisation_out_of_plane": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "23.39%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 23.39
+                        }
+                      }
+                    },
+                    "buckling_status_out_of_plane": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Acceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    },
+                    "final_utilisation": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "1603.77%"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 1603.77
+                        }
+                      }
+                    },
+                    "final_utilisation_status": {
+                      "type": "object",
+                      "properties": {
+                        "print_value": {
+                          "type": "string",
+                          "example": "Unacceptable"
+                        },
+                        "value": {
+                          "type": "boolean",
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid request parameters."
+            }
+          }
+        }
+      },
+      "/load_calculator" : {
+        "post": {
+          "summary": "Load calculating based on material and footprint inputs.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Material and footprint data for load calculation",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "material": {
+                    "type": "object",
+                    "properties": {
+                      "density": {
+                        "type": "number",
+                        "description": "The density of the slab material (kg/m³).",
+                        "example": 450
+                      }
+                    },
+                    "required": []
+                  },
+                  "footprint": {
+                    "type": "object",
+                    "properties": {
+                      "slab_thickness": {
+                        "type": "number",
+                        "description": "The thickness of the slab (m).",
+                        "example": 0.2
+                      },
+                      "width": {
+                        "type": "number",
+                        "description": "The width of the slab (m).",
+                        "example": 2
+                      },
+                      "length": {
+                        "type": "number",
+                        "description": "The length of the slab (m).",
+                        "example": 4
+                      },
+                      "height": {
+                        "type": "number",
+                        "description": "The height of the building (m).",
+                        "example": 2
+                      },
+                      "column_number": {
+                        "type": "integer",
+                        "description": "The number of columns.",
+                        "example": 6
+                      }
+                    },
+                    "required": []
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "I_L": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for ULS Category 3 (Instantaneous): 7.96 kN/m" },
+                      "value": { "type": "number", "example": 7.96 }
+                    }
+                  },
+                  "I_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for ULS Category 3 (Instantaneous) for column: 7.24 kN" },
+                      "value": { "type": "number", "example": 7.24 }
+                    }
+                  },
+                  "M_L": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for ULS Category 2 (Medium-term): 5.68 kN/m" },
+                      "value": { "type": "number", "example": 5.68 }
+                    }
+                  },
+                  "M_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for ULS Category 2 (Medium-term) for column: 5.90 kN" },
+                      "value": { "type": "number", "example": 5.9 }
+                    }
+                  },
+                  "P_L": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for ULS Category 1 (Permanent): 2.74 kN/m" },
+                      "value": { "type": "number", "example": 2.74 }
+                    }
+                  },
+                  "P_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for ULS Category 1 (Permanent) for column: 4.77 kN" },
+                      "value": { "type": "number", "example": 4.77 }
+                    }
+                  },
+                  "SLS_L": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Maximum load for SLS: 5.51 kN/m" },
+                      "value": { "type": "number", "example": 5.51 }
+                    }
+                  },
+                  "g_acmp": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Accompanying variable action: 1.13 kN/m" },
+                      "value": { "type": "number", "example": 1.13 }
+                    }
+                  },
+                  "g_lead": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Leading variable action: 2.80 kN/m" },
+                      "value": { "type": "number", "example": 2.8 }
+                    }
+                  },
+                  "gk": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "The calculated dead load on the beam (gk) is 2.03 kN/m" },
+                      "value": { "type": "number", "example": 2.03 }
+                    }
+                  },
+                  "psi_acmp": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "psi_acmp: 0.00" },
+                      "value": { "type": "number", "example": 0 }
+                    }
+                  },
+                  "psi_lead": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "psi_lead: 0.20" },
+                      "value": { "type": "number", "example": 0.2 }
+                    }
+                  },
+                  "qk_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "qk_column: 0.90" },
+                      "value": { "type": "number", "example": 0.9 }
+                    }
+                  },
+                  "qp": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Calculated peak velocity pressure qp: 0.28 kN/m²" },
+                      "value": { "type": "number", "example": 0.28 }
+                    }
+                  },
+                  "sk_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "sk_column: 1.07" },
+                      "value": { "type": "number", "example": 1.07 }
+                    }
+                  },
+                  "wind_direct": {
+                    "type": "object",
+                    "properties": {
+                      "A": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area A for wind_direct: -0.34 kN/m²" },
+                          "value": { "type": "number", "example": -0.34 }
+                        }
+                      },
+                      "B": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area B for wind_direct: -0.23 kN/m²" },
+                          "value": { "type": "number", "example": -0.23 }
+                        }
+                      },
+                      "C": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area C for wind_direct: -0.14 kN/m²" },
+                          "value": { "type": "number", "example": -0.14 }
+                        }
+                      },
+                      "D": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area D for wind_direct: 0.20 kN/m²" },
+                          "value": { "type": "number", "example": 0.2 }
+                        }
+                      },
+                      "E": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area E for wind_direct: -0.08 kN/m²" },
+                          "value": { "type": "number", "example": -0.08 }
+                        }
+                      }
+                    }
+                  },
+                  "wind_side": {
+                    "type": "object",
+                    "properties": {
+                      "A": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area A for wind_side: -0.34 kN/m²" },
+                          "value": { "type": "number", "example": -0.34 }
+                        }
+                      },
+                      "B": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area B for wind_side: -0.23 kN/m²" },
+                          "value": { "type": "number", "example": -0.23 }
+                        }
+                      },
+                      "C": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area C for wind_side: -0.14 kN/m²" },
+                          "value": { "type": "number", "example": -0.14 }
+                        }
+                      },
+                      "D": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area D for wind_side: 0.23 kN/m²" },
+                          "value": { "type": "number", "example": 0.23 }
+                        }
+                      },
+                      "E": {
+                        "type": "object",
+                        "properties": {
+                          "print_value": { "type": "string", "example": "We for area E for wind_side: -0.14 kN/m²" },
+                          "value": { "type": "number", "example": -0.14 }
+                        }
+                      }
+                    }
+                  },
+                  "wk": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "Wind load on the beam (wk): 1.13 kN/m" },
+                      "value": { "type": "number", "example": 1.13 }
+                    }
+                  },
+                  "wk_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": { "type": "string", "example": "wk_column: 0.90" },
+                      "value": { "type": "number", "example": 0.9 }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/joint1": {
+        "post": {
+          "summary": "Optimizes the joint1 details based on provided material and footprint attributes.",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Cross sections and footprint attributes for joint1 details optimization.",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cross_section": {
+                    "type": "object",
+                    "properties": {
+                      "column_w": {
+                        "type": "number",
+                        "example": 85
+                      },
+                      "column_h": {
+                        "type": "number",
+                        "example": 127
+                      },
+                      "tie_beam_h": {
+                        "type": "number",
+                        "example": 190
+                      },
+                      "bottom_sill_w": {
+                        "type": "number",
+                        "example": 158
+                      }
+                    }
+                  },
+                  "footprint": {
+                    "type": "object",
+                    "properties": {
+                      "height": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "b_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "b_clm = 85"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 85
+                      }
+                    }
+                  },
+                  "btl_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "btl_clm = 28.33"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 28.33
+                      }
+                    }
+                  },
+                  "dtj_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "dtj_clm = 94.8"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 94.8
+                      }
+                    }
+                  },
+                  "dtl_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "dtl_clm = 52.66"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 52.67
+                      }
+                    }
+                  },
+                  "dtt_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "dtt_clm = 26.32"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 26.33
+                      }
+                    }
+                  },
+                  "ttl_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "ttl_clm = 42.33"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 42.33
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input provided."
+            }
+          }
+        }
+      },
+      "/joint2": {
+        "post": {
+          "summary": "Optimizes the joint2 details based on provided material and footprint attributes.",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Cross sections and footprint attributes for joint2 details optimization.",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cross_section": {
+                    "type": "object",
+                    "properties": {
+                      "column_w": {
+                        "type": "number",
+                        "example": 85
+                      },
+                      "column_h": {
+                        "type": "number",
+                        "example": 127
+                      },
+                      "tie_beam_h": {
+                        "type": "number",
+                        "example": 190
+                      },
+                      "bottom_sill_w": {
+                        "type": "number",
+                        "example": 158
+                      }
+                    }
+                  },
+                  "footprint": {
+                    "type": "object",
+                    "properties": {
+                      "height": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jc1": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc1 = 63.33"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.33
+                      }
+                    }
+                  },
+                  "jc2": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc2 = 31.67"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 31.67
+                      }
+                    }
+                  },
+                  "jc3": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc3 = 127.00"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 127
+                      }
+                    }
+                  },
+                  "jc4": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc4 = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "jc5": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc5 = 0.40"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 0.4
+                      }
+                    }
+                  },
+                  "jc6": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc6 = 190.00"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 190
+                      }
+                    }
+                  },
+                  "jc7": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "jc7 = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input provided."
+            }
+          }
+        }
+      },
+      "/joint3": {
+        "post": {
+          "summary": "Optimizes the joint3 details based on provided material and footprint attributes.",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Material and footprint attributes for joint3 details optimization.",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cross_section": {
+                    "type": "object",
+                    "properties": {
+                      "column_h": {
+                        "type": "number",
+                        "example": 100
+                      },
+                      "column_w": {
+                        "type": "number",
+                        "example": 112.5
+                      },
+                      "tie_beam_h": {
+                        "type": "number",
+                        "example": 152.4
+                      }
+                    }
+                  },
+                  "material": {
+                    "type": "object",
+                    "properties": {
+                      "dtl_e": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "dtl_s": {
+                        "type": "number",
+                        "example": 2.5
+                      },
+                      "dtl_v": {
+                        "type": "number",
+                        "example": 1.5
+                      },
+                      "dtl_g": {
+                        "type": "number",
+                        "example": 1.5
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "capacity_kN": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "11.04 kN"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 11.04
+                      }
+                    }
+                  },
+                  "d": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "25.91 mm"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 25.91
+                      }
+                    }
+                  },
+                  "lim_e": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "54.69 mm"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 54.69
+                      }
+                    }
+                  },
+                  "lim_g": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "41.02 mm"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 41.02
+                      }
+                    }
+                  },
+                  "lim_s": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "68.36 mm"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 68.36
+                      }
+                    }
+                  },
+                  "lim_v": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "41.02 mm"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 41.02
+                      }
+                    }
+                  },
+                  "status": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "Acceptable"
+                      },
+                      "value": {
+                        "type": "boolean",
+                        "example": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input provided."
+            }
+          }
+        }
+      },
+      "/joint4": {
+        "post": { 
+          "summary": "Optimizes the joint4 details based on provided material and footprint attributes.",
+          "produces": [
+            "application/json"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Cross sections and footprint attributes for joint4 details optimization.",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cross_section": {
+                    "type": "object",
+                    "properties": {
+                      "column_w": {
+                        "type": "number",
+                        "example": 85
+                      },
+                      "column_h": {
+                        "type": "number",
+                        "example": 127
+                      },
+                      "tie_beam_h": {
+                        "type": "number",
+                        "example": 190
+                      },
+                      "bottom_sill_w": {
+                        "type": "number",
+                        "example": 158
+                      }
+                    }
+                  },
+                  "footprint": {
+                    "type": "object",
+                    "properties": {
+                      "height": {
+                        "type": "number",
+                        "example": 2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "D": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "D = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  },
+                  "btu_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "btu_clm = 42.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 42.5
+                      }
+                    }
+                  },
+                  "e_sb": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "e_sb = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  },
+                  "gl_s_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "gl_s_b = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  },
+                  "l_scr": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "l_scr = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "leu_s_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "leu_s_b = 31.75"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 31.75
+                      }
+                    }
+                  },
+                  "lsu_s_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "lsu_s_b = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "t_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "t_b = 127.00"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 127
+                      }
+                    }
+                  },
+                  "ttu_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "ttu_clm = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "w_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "w_b = 85.00"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 85
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input provided."
+            }
+          }
+        }
+      }
+    }    
+  }
