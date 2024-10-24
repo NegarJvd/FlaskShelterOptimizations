@@ -687,7 +687,7 @@
           }
         }
       },
-      "/joint1": {
+      "/joint1-2-4": {
         "post": {
           "summary": "Optimizes the joint1 details based on provided material and footprint attributes.",
           "produces": [
@@ -822,74 +822,7 @@
                         "example": 42.33
                       }
                     }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Invalid input provided."
-            }
-          }
-        }
-      },
-      "/joint2": {
-        "post": {
-          "summary": "Optimizes the joint2 details based on provided material and footprint attributes.",
-          "produces": [
-            "application/json"
-          ],
-          "consumes": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Cross sections and footprint attributes for joint2 details optimization.",
-              "required": true,
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cross_section": {
-                    "type": "object",
-                    "properties": {
-                      "column_w": {
-                        "type": "number",
-                        "example": 85
-                      },
-                      "column_h": {
-                        "type": "number",
-                        "example": 127
-                      },
-                      "tie_beam_h": {
-                        "type": "number",
-                        "example": 190
-                      },
-                      "bottom_sill_w": {
-                        "type": "number",
-                        "example": 158
-                      }
-                    }
                   },
-                  "footprint": {
-                    "type": "object",
-                    "properties": {
-                      "height": {
-                        "type": "number",
-                        "example": 2
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "type": "object",
-                "properties": {
                   "jc1": {
                     "type": "object",
                     "properties": {
@@ -978,6 +911,136 @@
                       "value": {
                         "type": "number",
                         "example": 21.17
+                      }
+                    }
+                  },
+                  "D": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "D = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  },
+                  "btu_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "btu_clm = 42.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 42.5
+                      }
+                    }
+                  },
+                  "e_sb": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "e_sb = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  },
+                  "gl_s_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "gl_s_b = 21.17"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 21.17
+                      }
+                    }
+                  },
+                  "l_scr": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "l_scr = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "leu_s_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "leu_s_b = 31.75"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 31.75
+                      }
+                    }
+                  },
+                  "lsu_s_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "lsu_s_b = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "t_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "t_b = 127.00"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 127
+                      }
+                    }
+                  },
+                  "ttu_clm": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "ttu_clm = 63.50"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 63.5
+                      }
+                    }
+                  },
+                  "w_b": {
+                    "type": "object",
+                    "properties": {
+                      "print_value": {
+                        "type": "string",
+                        "example": "w_b = 85.00"
+                      },
+                      "value": {
+                        "type": "number",
+                        "example": 85
                       }
                     }
                   }
@@ -1144,203 +1207,6 @@
                       "value": {
                         "type": "boolean",
                         "example": true
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Invalid input provided."
-            }
-          }
-        }
-      },
-      "/joint4": {
-        "post": { 
-          "summary": "Optimizes the joint4 details based on provided material and footprint attributes.",
-          "produces": [
-            "application/json"
-          ],
-          "consumes": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Cross sections and footprint attributes for joint4 details optimization.",
-              "required": true,
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "cross_section": {
-                    "type": "object",
-                    "properties": {
-                      "column_w": {
-                        "type": "number",
-                        "example": 85
-                      },
-                      "column_h": {
-                        "type": "number",
-                        "example": 127
-                      },
-                      "tie_beam_h": {
-                        "type": "number",
-                        "example": 190
-                      },
-                      "bottom_sill_w": {
-                        "type": "number",
-                        "example": 158
-                      }
-                    }
-                  },
-                  "footprint": {
-                    "type": "object",
-                    "properties": {
-                      "height": {
-                        "type": "number",
-                        "example": 2
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "D": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "D = 21.17"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 21.17
-                      }
-                    }
-                  },
-                  "btu_clm": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "btu_clm = 42.50"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 42.5
-                      }
-                    }
-                  },
-                  "e_sb": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "e_sb = 21.17"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 21.17
-                      }
-                    }
-                  },
-                  "gl_s_b": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "gl_s_b = 21.17"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 21.17
-                      }
-                    }
-                  },
-                  "l_scr": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "l_scr = 63.50"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 63.5
-                      }
-                    }
-                  },
-                  "leu_s_b": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "leu_s_b = 31.75"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 31.75
-                      }
-                    }
-                  },
-                  "lsu_s_b": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "lsu_s_b = 63.50"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 63.5
-                      }
-                    }
-                  },
-                  "t_b": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "t_b = 127.00"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 127
-                      }
-                    }
-                  },
-                  "ttu_clm": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "ttu_clm = 63.50"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 63.5
-                      }
-                    }
-                  },
-                  "w_b": {
-                    "type": "object",
-                    "properties": {
-                      "print_value": {
-                        "type": "string",
-                        "example": "w_b = 85.00"
-                      },
-                      "value": {
-                        "type": "number",
-                        "example": 85
                       }
                     }
                   }

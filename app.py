@@ -62,7 +62,7 @@ class LoadCalculation(Resource):
         
         return jsonify(calculator.calculator())
     
-class JointDetail1(Resource):
+class JointDetail124(Resource):
     def post(self):
         data = request.get_json()  
         if not data:
@@ -73,20 +73,9 @@ class JointDetail1(Resource):
             data.get('cross_section', {})
         )
         
-        return jsonify(details.calculate_joint_1())
-    
-class JointDetail2(Resource):
-    def post(self):
-        data = request.get_json()  
-        if not data:
-            return jsonify({"error": "Invalid input"}), 400
+        final_result = details.calculate_joint_1() | details.calculate_joint_2() | details.calculate_joint_4() 
         
-        details = Joints(
-            data.get('footprint', {}),
-            data.get('cross_section', {})
-        )
-        
-        return jsonify(details.calculate_joint_2())
+        return jsonify(final_result)
     
 class JointDetail3(Resource):
     def post(self):
@@ -100,28 +89,13 @@ class JointDetail3(Resource):
         )
         
         return jsonify(details.calculate_capacity_and_status_for_graph())
-    
-class JointDetail4(Resource):
-    def post(self):
-        data = request.get_json()  
-        if not data:
-            return jsonify({"error": "Invalid input"}), 400
-        
-        details = Joints(
-            data.get('footprint', {}),
-            data.get('cross_section', {})
-        )
-        
-        return jsonify(details.calculate_joint_4())
 
 
 #api resources 
 api.add_resource(CrossSectionOptimization, '/cross_section')
 api.add_resource(LoadCalculation, '/load_calculator')
-api.add_resource(JointDetail1, '/joint1')
-api.add_resource(JointDetail2, '/joint2')
+api.add_resource(JointDetail124, '/joint1-2-4')
 api.add_resource(JointDetail3, '/joint3')
-api.add_resource(JointDetail4, '/joint4')
 
 # Configure Swagger UI
 SWAGGER_URL = '/swagger'

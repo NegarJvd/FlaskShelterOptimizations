@@ -53,7 +53,7 @@ class Joints:
         jc2 = self.t_t * (1/6)
         jc3 = self.t_b
         jc4 = self.t_b * (1/2)
-        jc5 = self.H_F * (1/5)
+        jc5 = self.H_F * (1/5) * 100
         jc6 = self.t_t
         jc7 = self.t_b * (1/6)
 

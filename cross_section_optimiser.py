@@ -155,7 +155,7 @@ class CrossSectionOptimizer:
                     break
 
         # Sort results by weight and print final summary
-        results.sort()  # Default sort by first element which is weight
+        results.sort(reverse=True)  # Default sort by first element which is weight #sorted reverse just to show to user, because of limiting
         
         output = []
 
