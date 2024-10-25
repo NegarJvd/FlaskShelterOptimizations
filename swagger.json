@@ -1259,11 +1259,157 @@
           "responses": {
             "200": {
               "description": "Successful response with G-code commands as a string",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "type": "string",
-                    "example": "G21\nG17\nG90\nF1000\nS10000\nG0 Z10\nG0 X4.0 Y4.0\nG1 Z-2\nG1 X16.0\nG1 Y36.0\nG1 X4.0\nG1 Y4.0\nG0 Z10\n..."
+              "schema": {
+                "type": "string",
+                "example": "G21\nG17\nG90\nF1000\nS10000\nG0 Z10\nG0 X4.0 Y4.0\nG1 Z-2\nG1 X16.0\nG1 Y36.0\nG1 X4.0\nG1 Y4.0\nG0 Z10\n..."
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      },
+      "/design_verify" : {
+        "post": {
+          "summary": "Verify if design is acceptable or not.",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "gets array of designs and return just the acceptable designs id",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "designs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "material": {
+                          "type": "object",
+                          "properties": {
+                            "partial_factor": {
+                              "type": "number",
+                              "example": 1.3
+                            },
+                            "density": {
+                              "type": "number",
+                              "example": 610
+                            },
+                            "bending_strength": {
+                              "type": "number",
+                              "example": 91
+                            },
+                            "shear_strength": {
+                              "type": "number",
+                              "example": 9
+                            },
+                            "compression_parallel": {
+                              "type": "number",
+                              "example": 45
+                            },
+                            "e_modulus": {
+                              "type": "number",
+                              "example": 11.2
+                            },
+                            "e_modulus_5": {
+                              "type": "number",
+                              "example": 11.2
+                            },
+                            "modification_factor_permanent_term": {
+                              "type": "number",
+                              "example": 0.5
+                            },
+                            "modification_factor_medium_term": {
+                              "type": "number",
+                              "example": 0.65
+                            },
+                            "modification_factor_instantaneous_term": {
+                              "type": "number",
+                              "example": 0.9
+                            },
+                            "creep_factor": {
+                              "type": "number",
+                              "example": 2
+                            },
+                            "creep_factor_solid_timber": {
+                              "type": "number",
+                              "example": 0.2
+                            }
+                          }
+                        },
+                        "cross_section": {
+                          "type": "object",
+                          "properties": {
+                            "beam_w": {
+                              "type": "number",
+                              "example": 0.1,
+                              "description": "Width of the beam in meters"
+                            },
+                            "beam_h": {
+                              "type": "number",
+                              "example": 0.15,
+                              "description": "Height of the beam in meters"
+                            }
+                          }
+                        },
+                        "footprint": {
+                          "type": "object",
+                          "properties": {
+                            "length": {
+                              "type": "number",
+                              "example": 5.0
+                            },
+                            "column_number": {
+                              "type": "integer",
+                              "example": 4
+                            },
+                            "height": {
+                              "type": "number",
+                              "example": 3.0,
+                              "description": "Height of the column in meters"
+                            },
+                            "slab_thickness": {
+                              "type": "number",
+                              "example": 0.2
+                            },
+                            "width": {
+                              "type": "number",
+                              "example": 2
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with acceptable designs.",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "acceptable_designs": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "example": 1
+                    }
                   }
                 }
               }

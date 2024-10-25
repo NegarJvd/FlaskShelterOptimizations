@@ -8,6 +8,7 @@ from load_calculator import LoadCaluculator
 from joint_3 import Joint_3
 from joint_1_2_4 import Joints
 from generate_gcode import GCodeGanarator
+from verifier import Verifier
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -97,9 +98,13 @@ class DesignVerify(Resource):
         if not data:
             return jsonify({"error": "Invalid input"}), 400
         
-        #TODO
+        acceptables = []
+        for design in data.get('designs'):
+            is_acceptable = Verifier(design.get('material'), design.get('cross_section'), design.get('footprint')).verify_every_design()
+            if is_acceptable:
+                acceptables.append(design.get('id'))
         
-        return jsonify(data)
+        return jsonify({'acceptable_designs': acceptables})
     
 class GenerateGCode(Resource):
     def post(self):
