@@ -102,7 +102,7 @@ class DesignVerify(Resource):
         for design in data.get('designs'):
             is_acceptable = Verifier(design.get('material'), design.get('cross_section'), design.get('footprint')).verify_every_design()
             if is_acceptable:
-                acceptables.append(design.get('id'))
+                acceptables.append(design)
         
         return jsonify({'acceptable_designs': acceptables})
     
