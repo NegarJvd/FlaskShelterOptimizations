@@ -7,6 +7,7 @@ from cross_section_optimiser import CrossSectionOptimizer
 from load_calculator import LoadCaluculator
 from joint_3 import Joint_3
 from joint_1_2_4 import Joints
+from generate_gcode import GCodeGanarator
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -90,12 +91,52 @@ class JointDetail3(Resource):
         
         return jsonify(details.calculate_capacity_and_status_for_graph())
 
+class DesignVerify(Resource):
+    def post(self):
+        data = request.get_json() 
+        if not data:
+            return jsonify({"error": "Invalid input"}), 400
+        
+        #TODO
+        
+        return jsonify(data)
+    
+class GenerateGCode(Resource):
+    def post(self):
+        data = request.get_json() 
+        if not data:
+            return jsonify({"error": "Invalid input"}), 400
+        
+        tie_beam_w = data.get('tie_beam_w', 20)
+        tie_beam_h = data.get('tie_beam_h', 40)
+        column_h = data.get('column_h', 10)
+        
+        gcode_generator = GCodeGanarator() 
+        gcode_program = gcode_generator.generate_gcode(
+            mortise_width=tie_beam_w,                 # tie_beam Width
+            mortise_height=tie_beam_h,                # tie_beam Height
+            mortise_depth=column_h,                   # Coulmn Height
+            tenon_width=(1/3) * tie_beam_w,           # (1/3) tie_beam Width
+            tenon_height=tie_beam_h,                  # tie_beam Height
+            tenon_length=column_h,                    # Coulmn Height
+            peg_diameter=1,
+            peg_depth=20,
+            tool_diameter=8,
+            feed_rate=1000,
+            spindle_speed=10000,
+            safe_z=10,
+        )
+        
+        return jsonify(gcode_program)
 
 #api resources 
 api.add_resource(CrossSectionOptimization, '/cross_section')
 api.add_resource(LoadCalculation, '/load_calculator')
 api.add_resource(JointDetail124, '/joint1-2-4')
 api.add_resource(JointDetail3, '/joint3')
+api.add_resource(DesignVerify, '/design_verify')
+api.add_resource(GenerateGCode, '/generate_g_code')
+
 
 # Configure Swagger UI
 SWAGGER_URL = '/swagger'

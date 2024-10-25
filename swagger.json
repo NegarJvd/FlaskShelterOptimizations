@@ -1218,6 +1218,61 @@
             }
           }
         }
+      },
+      "/generate_g_code" : {
+        "post": {
+          "summary": "Gets some cross section values and returns g code for cnc",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Cross section for generate gcode of cnc",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tie_beam_w": {
+                    "type": "number",
+                    "description": "Tie beam width",
+                    "example": 20
+                  },
+                  "tie_beam_h": {
+                    "type": "number",
+                    "description": "Tie beam height",
+                    "example": 40
+                  },
+                  "column_h": {
+                    "type": "number",
+                    "description": "Column height",
+                    "example": 10
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with G-code commands as a string",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string",
+                    "example": "G21\nG17\nG90\nF1000\nS10000\nG0 Z10\nG0 X4.0 Y4.0\nG1 Z-2\nG1 X16.0\nG1 Y36.0\nG1 X4.0\nG1 Y4.0\nG0 Z10\n..."
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
       }
     }    
   }
