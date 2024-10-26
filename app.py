@@ -145,7 +145,7 @@ api.add_resource(GenerateGCode, '/generate_g_code')
 
 # Configure Swagger UI
 SWAGGER_URL = '/swagger'
-API_URL = 'http://127.0.0.1:5000/swagger.json'
+API_URL = 'http://flask.locknl.com/swagger.json'
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
@@ -166,4 +166,4 @@ def swagger():
         return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

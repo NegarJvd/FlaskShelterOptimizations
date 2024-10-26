@@ -1407,8 +1407,8 @@
                   "acceptable_designs": {
                     "type": "array",
                     "items": {
-                      "type": "integer",
-                      "example": 1
+                      "type": "object",
+                      "description": "desgin object that user send it in input"
                     }
                   }
                 }
